@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Societe index{% endblock %}
+
+{% block body %}
+    <h1>Societe index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Rs</th>
+                <th>Adresse</th>
+                <th>Contact</th>
+                <th>Fax</th>
+                <th>Email</th>
+                <th>Logo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for societe in societes %}
+            <tr>
+                <td>{{ societe.id }}</td>
+                <td>{{ societe.rs }}</td>
+                <td>{{ societe.adresse }}</td>
+                <td>{{ societe.contact }}</td>
+                <td>{{ societe.fax }}</td>
+                <td>{{ societe.email }}</td>
+                <td>{{ societe.logo }}</td>
+                <td>
+                    <a href="{{ path('app_societe_show', {'id': societe.id}) }}">show</a>
+                    <a href="{{ path('app_societe_edit', {'id': societe.id}) }}">edit</a>
+<a href="{{ path('app_societe_delete', {'id': societe.id}) }}" onclick="return confirm('Confirmez-vous la suppression ?');">Supprimer</a>
+
+                </td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_societe_new') }}">Create new</a>
+{% endblock %}

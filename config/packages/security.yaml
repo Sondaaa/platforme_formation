@@ -1,0 +1,6 @@
+security:
+    enable_authenticator_manager: true
+
+    firewalls:
+        main:
+            # pas de csrf_protection ici
