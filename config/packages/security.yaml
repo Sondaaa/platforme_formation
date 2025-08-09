@@ -2,5 +2,12 @@ security:
     enable_authenticator_manager: true
 
     firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
         main:
-            # pas de csrf_protection ici
+            lazy: true   # starts the session
+            # no anonymous: true — it’s automatic now
+
+    access_control: []
