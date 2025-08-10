@@ -4,3 +4,10 @@ societe:
 home:
   resource: '../src/Controller/HomeController.php'
   type: annotation
+dashboard:
+  resource: '../src/Controller/Admin/DashboardController.php'
+  type: annotation
+utilisateur:
+  resource: '../src/Controller/UtilisateurController.php'
+  type: annotation  
+  

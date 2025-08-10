@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin{% endblock %}</title>
+
+    {# SB Admin CSS #}
+    <link href="{{ asset('css/css-admin/styles.css') }}" rel="stylesheet">
+
+    {% block stylesheets %}{% endblock %}
+</head>
+<body class="sb-nav-fixed">
+
+    {# Top Navbar #}
+    {% include 'admin/_navbar.html.twig' %}
+
+    <div id="layoutSidenav">
+        {# Sidebar #}
+        {% include 'admin/_sidebar.html.twig' %}
+
+        <div id="layoutSidenav_content">
+            <main class="container-fluid px-4">
+                {% block body %}{% endblock %}
+            </main>
+
+            {% include 'admin/_footer.html.twig' %}
+        </div>
+    </div>
+
+    {# SB Admin JS #}
+    <script src="{{ asset('js/js-admin/scripts.js') }}"></script>
+    {% block javascripts %}{% endblock %}
+</body>
+</html>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Form;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 use App\Entity\Societe;
 use Symfony\Component\Form\AbstractType;
@@ -17,7 +18,11 @@ class Societe3Type extends AbstractType
             ->add('contact')
             ->add('fax')
             ->add('email')
-            ->add('logo')
+             ->add('logo', FileType::class, [
+                'label' => 'Logo (image)',
+                'mapped' => false,    // upload manuel
+                'required' => false,
+            ]);
         ;
     }
 

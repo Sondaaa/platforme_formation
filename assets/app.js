@@ -7,6 +7,9 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
-
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'admin-lte/dist/js/adminlte.min';
+import 'admin-lte/dist/css/adminlte.min.css';
+import 'admin-lte/plugins/fontawesome-free/css/all.min.css';
 // start the Stimulus application
 import './bootstrap';

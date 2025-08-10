@@ -13,7 +13,24 @@ class Societe
     private ?int $id = null;
 
     #[ORM\Column(type: "string", length: 255)]
-    private ?string $rs = null;
+    private ?string $rs = null; // Required
+
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    private ?string $adresse = null;
+
+    #[ORM\Column(type: "string", length: 100, nullable: true)]
+    private ?string $contact = null;
+
+    #[ORM\Column(type: "string", length: 100, nullable: true)]
+    private ?string $fax = null;
+
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    private ?string $email = null;
+
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    private ?string $logo = null;
+
+    // ---------------- Getters & Setters ---------------- //
 
     public function getId(): ?int
     {
@@ -30,20 +47,7 @@ class Societe
         $this->rs = $rs;
         return $this;
     }
-    #[ORM\Column(type: "string", length: 255, nullable: true)]
-    private ?string $adresse = null;
 
-    #[ORM\Column(type: "string", length: 100, nullable: true)]
-    private ?string $contact = null;
-
-    #[ORM\Column(type: "string", length: 100, nullable: true)]
-    private ?string $fax = null;
-
-    #[ORM\Column(type: "string", length: 255, nullable: true)]
-    private ?string $email = null;
-   
-    #[ORM\Column(type: "string", length: 255, nullable: true)]
-    private ?string $logo = null;
     public function getAdresse(): ?string
     {
         return $this->adresse;
@@ -87,6 +91,7 @@ class Societe
         $this->email = $email;
         return $this;
     }
+
     public function getLogo(): ?string
     {
         return $this->logo;

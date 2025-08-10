@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {# <title>{% block title %}Admin Dashboard{% endblock %}</title> #}
+    <link href="{{ asset('css/css-admin/styles.css') }}" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+    {% block body %}{% endblock %}
+
+    <script src="{{ asset('js/js-admin/scripts.js') }}"></script>
+    {% block javascripts %}{% endblock %}
+</body>
+</html>
