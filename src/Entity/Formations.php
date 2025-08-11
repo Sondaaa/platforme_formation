@@ -2,11 +2,9 @@
 
 namespace App\Entity;
 
-// use App\Repository\FormationsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-
 class Formations
 {
     #[ORM\Id]
@@ -35,6 +33,38 @@ class Formations
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private ?string $prix = null;
 
+    // Ajout des colonnes photo et video
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $photo = null;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $video = null;
+
+    // ... getters et setters existants ...
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
+        return $this;
+    }
+
+    public function getVideo(): ?string
+    {
+        return $this->video;
+    }
+
+    public function setVideo(?string $video): self
+    {
+        $this->video = $video;
+        return $this;
+    }
+
+    // Reste de la classe (getters/setters déjà présents)
     public function getId(): ?int
     {
         return $this->id;

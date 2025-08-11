@@ -25,6 +25,40 @@
       <label for="formations_testValidation" class="form-check-label fw-bold">Test Validation</label>
     </div>
   </div>
+   <div class="col-md-6 mb-3">
+        {{ form_label(form.photo, 'Photo', { label_attr: { class: 'form-label fw-bold' } }) }}
+        
+        {% if service is defined and service.photo %}
+            <div class="mb-2">
+                <img src="{{ asset('uploads/logos/' ~ service.photo) }}" alt="" 
+                     class="img-thumbnail" style="max-height: 100px;">
+            </div>
+        {% endif %}
+        
+        <div class="custom-file">
+            {{ form_widget(form.photo, { attr: { class: 'custom-file-input', id: 'logoUpload' } }) }}
+            <label class="custom-file-label" for="logoUpload">Choose file...</label>
+        </div>
+        {{ form_errors(form.photo) }}
+    </div>
+    <div class="col-md-6 mb-3">
+    {{ form_label(form.video, 'Vidéo', { label_attr: { class: 'form-label fw-bold' } }) }}
+
+    {% if service is defined and service.video %}
+        <div class="mb-2">
+            <video width="320" height="240" controls class="img-thumbnail" style="max-height: 150px;">
+                <source src="{{ asset('uploads/videos/' ~ service.video) }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    {% endif %}
+
+    <div class="custom-file">
+        {{ form_widget(form.video, { attr: { class: 'custom-file-input', id: 'videoUpload' } }) }}
+        <label class="custom-file-label" for="videoUpload">Choose file...</label>
+    </div>
+    {{ form_errors(form.video) }}
+</div>
 </div>
 
 {{ form_widget(form._token) }}

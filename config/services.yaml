@@ -1,4 +1,7 @@
 services:
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
     App\Controller\SocieteController:
         autowire: true
         autoconfigure: true
@@ -14,11 +17,22 @@ services:
     App\Controller\FormationsController:
         autowire: true
         autoconfigure: true
-        public: true   
+        public: true
+    App\Controller\ServiceController:
+        autowire: true
+        autoconfigure: true
+        public: true 
+    App\Controller\MatiereController:
+        autowire: true
+        autoconfigure: true
+        public: true        
     App\Repository\:
         resource: '../src/Repository'
         tags: ['doctrine.repository_service']
         public: true
+    
 
 parameters:
     logos_directory: '%kernel.project_dir%/public/uploads/logos'
+    photos_directory: '%kernel.project_dir%/public/uploads/photos'
+    videos_directory: '%kernel.project_dir%/public/uploads/videos'

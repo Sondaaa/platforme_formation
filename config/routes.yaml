@@ -13,5 +13,11 @@ utilisateur:
 formations:
   resource: '../src/Controller/FormationsController.php'
   type: annotation
+service:
+  resource: '../src/Controller/ServiceController.php'
+  type: annotation
+matiere:
+  resource: '../src/Controller/MatiereController.php'
+  type: annotation    
 
   
