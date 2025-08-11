@@ -1,0 +1,70 @@
+{# 
+  A reusable CRUD index table.  
+  Required variables: 
+    - title: string
+    - new_path: string (route path for "Create new")
+    - new_label: string (button label)
+    - headers: array of column names
+    - rows: array of objects/arrays
+    - actions: boolean (whether to show default edit/delete buttons)
+#}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <a href="{{ new_path }}" class="btn btn-sm btn-primary shadow-sm">
+    <i class="fas fa-plus fa-sm text-white-50"></i> {{ new_label }}
+  </a>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" width="100%" cellspacing="0">
+            <thead class="thead-light">
+              <tr>
+                {% for header in headers %}
+                  <th>{{ header }}</th>
+                {% endfor %}
+                {% if actions %}<th>Actions</th>{% endif %}
+              </tr>
+            </thead>
+            <tbody>
+              {% if rows is not empty %}
+                {% for row in rows %}
+                  <tr>
+                    {% for value in row %}
+                      <td>{{ value|raw }}</td>
+                    {% endfor %}
+                    {% if actions %}
+                      <td>
+                        <a href="{{ path(edit_route, {'id': row.id}) }}" class="btn btn-sm btn-warning">
+                          <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <form method="post" action="{{ path(delete_route, {'id': row.id}) }}" style="display:inline-block" onsubmit="return confirm('Supprimer ?');">
+                          <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ row.id) }}">
+                          <button class="btn btn-sm btn-danger">
+                            <i class="fas fa-trash"></i> Delete
+                          </button>
+                        </form>
+                      </td>
+                    {% endif %}
+                  </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td colspan="{{ headers|length + (actions ? 1 : 0) }}" class="text-center">
+                    No records found
+                  </td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+{% form_theme form 'form/_form_theme.html.twig' %}
+
+{# form_row: une colonne bootstrap (col-md-6) pour chaque champ #}
+{% block form_row %}
+    <div class="col-md-6 mb-3">
+        {# Si c'est une checkbox, on la rend différemment #}
+        {% if form.vars.block_prefixes|last == 'checkbox' %}
+            <div class="form-check">
+                {{ form_widget(form, { attr: { class: 'form-check-input' } }) }}
+                {{ form_label(form, null, { label_attr: { class: 'form-check-label fw-bold' } }) }}
+                {{ form_errors(form) }}
+            </div>
+        {% else %}
+            {{ form_label(form, null, { label_attr: { class: 'form-label fw-bold' } }) }}
+            {{ form_widget(form, { attr: { class: 'form-control' } }) }}
+            {{ form_errors(form) }}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{# button widget global #}
+{% block button_widget %}
+    {% set type = type|default('submit') %}
+    <button type="{{ type }}" class="btn btn-primary">
+        <i class="fas fa-save"></i> {{ label|default('Save') }}
+    </button>
+{% endblock %}

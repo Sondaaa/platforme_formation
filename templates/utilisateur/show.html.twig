@@ -3,56 +3,21 @@
 {% block title %}Utilisateur{% endblock %}
 
 {% block body %}
-    <h1>Utilisateur</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ utilisateur.id }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ utilisateur.username }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ utilisateur.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ utilisateur.roles ? utilisateur.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ utilisateur.password }}</td>
-            </tr>
-            <tr>
-                <th>IsActive</th>
-                <td>{{ utilisateur.isActive ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ utilisateur.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ utilisateur.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Datenaissance</th>
-                <td>{{ utilisateur.datenaissance ? utilisateur.datenaissance|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Diplome</th>
-                <td>{{ utilisateur.diplome }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_utilisateur_index') }}">back to list</a>
-
-    <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">edit</a>
-
-    {{ include('utilisateur/_delete_form.html.twig') }}
+    {% include 'form/_show_theme.html.twig' with {
+        title: 'Utilisateur',
+        fields: [
+            { label: 'Id', value: utilisateur.id },
+            { label: 'Username', value: utilisateur.username },
+            { label: 'Email', value: utilisateur.email },
+            { label: 'Roles', value: utilisateur.roles ? utilisateur.roles|join(', ') : '' },
+            { label: 'Password', value: utilisateur.password },
+            { label: 'Is Active', value: utilisateur.isActive ? '<span class="badge bg-success">Yes</span>' : '<span class="badge bg-danger">No</span>' },
+            { label: 'Nom', value: utilisateur.nom },
+            { label: 'Prénom', value: utilisateur.prenom },
+            { label: 'Date Naissance', value: utilisateur.datenaissance ? utilisateur.datenaissance|date('Y-m-d') : '' },
+            { label: 'Diplôme', value: utilisateur.diplome }
+        ],
+        back_path: path('app_utilisateur_index'),
+        edit_path: path('app_utilisateur_edit', {'id': utilisateur.id}),
+     } %}
 {% endblock %}

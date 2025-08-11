@@ -11,6 +11,10 @@ services:
         autowire: true
         autoconfigure: true
         public: true
+    App\Controller\FormationsController:
+        autowire: true
+        autoconfigure: true
+        public: true   
     App\Repository\:
         resource: '../src/Repository'
         tags: ['doctrine.repository_service']

@@ -1,0 +1,35 @@
+{# 
+  A reusable show page layout. 
+  Expected variables: 
+    - title: string
+    - entity: object/array
+    - fields: array of { label, value }
+    - back_path: string (route to go back)
+    - edit_path: string (route to edit)
+    - delete_template: string (partial for delete form)
+#}
+
+<h1 class="mb-4">{{ title }}</h1>
+
+<table class="table table-bordered">
+    <tbody>
+        {% for field in fields %}
+            <tr>
+                <th>{{ field.label }}</th>
+                <td>{{ field.value|raw }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="mt-3">
+    <a href="{{ back_path }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to list
+    </a>
+    <a href="{{ edit_path }}" class="btn btn-primary">
+        <i class="fas fa-edit"></i> Edit
+    </a>
+    {% if delete_template is defined %}
+        {{ include(delete_template) }}
+    {% endif %}
+</div>

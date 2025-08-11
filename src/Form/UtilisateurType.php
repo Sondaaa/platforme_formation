@@ -1,5 +1,9 @@
 <?php
+
 namespace App\Form;
+
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+
 
 use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
@@ -23,7 +27,11 @@ class UtilisateurType extends AbstractType
                 'expanded' => true,
             ])
             ->add('password', PasswordType::class, ['required' => false])
-            ->add('isActive')
+             ->add('isActive', CheckboxType::class, [
+                'label' => 'Active',
+                'required' => false,
+            ])
+
             ->add('nom', TextType::class)
             ->add('prenom', TextType::class)
             ->add('datenaissance', DateType::class, [

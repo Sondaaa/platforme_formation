@@ -10,4 +10,8 @@ dashboard:
 utilisateur:
   resource: '../src/Controller/UtilisateurController.php'
   type: annotation  
+formations:
+  resource: '../src/Controller/FormationsController.php'
+  type: annotation
+
   
