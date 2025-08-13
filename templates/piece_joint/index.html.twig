@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PieceJoint index{% endblock %}
+
+{% block body %}
+    <h1>PieceJoint index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Fichier</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for piece_joint in piece_joints %}
+            <tr>
+                <td>{{ piece_joint.id }}</td>
+                <td>{{ piece_joint.titre }}</td>
+                <td>{{ piece_joint.description }}</td>
+                <td>{{ piece_joint.fichier }}</td>
+                <td>
+                    <a href="{{ path('app_piece_joint_show', {'id': piece_joint.id}) }}">show</a>
+                    <a href="{{ path('app_piece_joint_edit', {'id': piece_joint.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_piece_joint_new') }}">Create new</a>
+{% endblock %}

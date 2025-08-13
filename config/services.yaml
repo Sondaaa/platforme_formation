@@ -22,7 +22,7 @@ services:
         autowire: true
         autoconfigure: true
         public: true 
-    App\Controller\MatiereController:
+    App\Controller\PieceJointController:
         autowire: true
         autoconfigure: true
         public: true        
@@ -36,3 +36,4 @@ parameters:
     logos_directory: '%kernel.project_dir%/public/uploads/logos'
     photos_directory: '%kernel.project_dir%/public/uploads/photos'
     videos_directory: '%kernel.project_dir%/public/uploads/videos'
+    attachments_directory: '%kernel.project_dir%/public/uploads/attachments'

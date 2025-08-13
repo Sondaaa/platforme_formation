@@ -16,8 +16,8 @@ formations:
 service:
   resource: '../src/Controller/ServiceController.php'
   type: annotation
-matiere:
-  resource: '../src/Controller/MatiereController.php'
+piece_joint:
+  resource: '../src/Controller/PieceJointController.php'
   type: annotation    
 
   

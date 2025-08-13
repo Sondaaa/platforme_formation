@@ -2,9 +2,13 @@
 
 namespace App\Entity;
 
+use App\Entity\PieceJoint;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity]
+#[ORM\Table(name: 'formations')]
 class Formations
 {
     #[ORM\Id]
@@ -12,13 +16,13 @@ class Formations
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $objectifs = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $modalite = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
@@ -33,38 +37,21 @@ class Formations
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private ?string $prix = null;
 
-    // Ajout des colonnes photo et video
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $video = null;
 
-    // ... getters et setters existants ...
+    #[ORM\OneToMany(mappedBy: 'formation', targetEntity: PieceJoint::class, cascade: ['persist', 'remove'])]
+   
+    private Collection $piecesJointes;
 
-    public function getPhoto(): ?string
+    public function __construct()
     {
-        return $this->photo;
+        $this->piecesJointes = new ArrayCollection();
     }
 
-    public function setPhoto(?string $photo): self
-    {
-        $this->photo = $photo;
-        return $this;
-    }
-
-    public function getVideo(): ?string
-    {
-        return $this->video;
-    }
-
-    public function setVideo(?string $video): self
-    {
-        $this->video = $video;
-        return $this;
-    }
-
-    // Reste de la classe (getters/setters déjà présents)
     public function getId(): ?int
     {
         return $this->id;
@@ -144,6 +131,53 @@ class Formations
     public function setPrix(?string $prix): self
     {
         $this->prix = $prix;
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
+        return $this;
+    }
+
+    public function getVideo(): ?string
+    {
+        return $this->video;
+    }
+
+    public function setVideo(?string $video): self
+    {
+        $this->video = $video;
+        return $this;
+    }
+
+    /** @return Collection<int, PieceJoint> */
+    public function getPiecesJointes(): Collection
+    {
+        return $this->piecesJointes;
+    }
+
+    public function addPieceJointe(PieceJoint $pieceJoint): self
+    {
+        if (!$this->piecesJointes->contains($pieceJoint)) {
+            $this->piecesJointes[] = $pieceJoint;
+            $pieceJoint->setFormation($this);
+        }
+        return $this;
+    }
+
+    public function removePieceJointe(PieceJoint $pieceJoint): self
+    {
+        if ($this->piecesJointes->removeElement($pieceJoint)) {
+            if ($pieceJoint->getFormation() === $this) {
+                $pieceJoint->setFormation(null);
+            }
+        }
         return $this;
     }
 }
