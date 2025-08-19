@@ -1,11 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New PieceJoint{% endblock %}
+{% block title %}
+  New PieceJoint
+{% endblock %}
 
 {% block body %}
-    <h1>Create new PieceJoint</h1>
+  <h1>Create new PieceJoint</h1>
 
-    {{ include('piece_joint/_form.html.twig') }}
+  {{ include('piece_joint/_form.html.twig') }}
 
-    {# <a href="{{ path('app_piece_joint_index') }}">back to list</a> #}
+  {# <a href="{{ path('app_piece_joint_index') }}">back to list</a> #}
+  <h5 class="mt-4">Pièces jointes existantes</h5>
+  <div class="border rounded p-3 bg-light">
+    {% if (formation.piecesJointes|length) > 0 %}
+      <ul class="list-unstyled">
+        {% for piece in formation.piecesJointes %}
+          <li>
+            <a href="{{ asset('uploads/attachments/' ~ piece.fichier) }}" target="_blank">📎 {{ piece.titre }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <span class="text-muted">Aucun fichier</span>
+    {% endif %}
+  </div>
 {% endblock %}

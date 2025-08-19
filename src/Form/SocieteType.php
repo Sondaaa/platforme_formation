@@ -16,6 +16,7 @@ class SocieteType extends AbstractType
             ->add('contact')
             ->add('fax')
             ->add('email')
+             ->add('tel')
             ->add('logo', FileType::class, [
                 'label' => 'Logo (image)',
                 'mapped' => false,    // upload manuel

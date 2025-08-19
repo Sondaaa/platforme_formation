@@ -19,14 +19,30 @@
   </head>
   <body id="page-top">
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="mainNav">
+
+
       <div class="container-fluid px-0">
-        {% if societe.logo %}
-          <a class="navbar-brand d-flex align-items-center ms-0" href="{{ path('app_societe_index') }}" style="padding-left:0;">
-            <img src="{{ asset('uploads/logos/' ~ societe.logo) }}" alt="Logo" style="width: 90px; height: auto;" />
-            <span class="ms-3 rs-title">{{ societe.rs }}</span>
-          </a>
-        {% endif %}
+       {% if societe.logo %}
+  <a class="navbar-brand d-flex align-items-center ms-0" href="{{ path('app_societe_index') }}" style="padding-left:0;">
+    <img src="{{ asset('uploads/logos/' ~ societe.logo) }}" alt="Logo" style="width: 90px; height: auto;" />
+    <div class="ms-3 d-flex flex-column">
+      <span class="rs-title fw-bold">{{ societe.rs }}</span>
+      {% if societe.fax %}
+        <span><i class="bi bi-telephone me-1"></i>{{ societe.fax }}</span>
+      {% endif %}
+      {% if societe.email %}
+        <span><i class="bi bi-envelope me-1"></i>{{ societe.email }}</span>
+      {% endif %}
+    </div>
+  </a>
+{% endif %}
+
+ 
+
+  <!-- Email -->
+  
+    
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
@@ -56,32 +72,60 @@
     </nav>
 
     <!-- Masthead -->
-    <header class="position-relative" style="height: 1000px; overflow: hidden;">
-      <div class="position-relative h-100">
-        <!-- Carousel Bootstrap -->
-        <div id="testCarousel" class="carousel slide h-100" data-bs-ride="carousel">
-          <div class="carousel-inner h-100">
-            <div class="carousel-item active h-100">
-              <img src="{{ asset('uploads/carousel/image1.jpg') }}" class="d-block w-100 h-100" alt="Slide 1" style="object-fit: cover;" />
-            </div>
-            <div class="carousel-item h-100">
-              <img src="{{ asset('uploads/carousel/image2.jpg') }}" class="d-block w-100 h-100" alt="Slide 2" style="object-fit: cover;" />
-            </div>
-            <div class="carousel-item h-100">
-              <img src="{{ asset('uploads/carousel/image3.jpg') }}" class="d-block w-100 h-100" alt="Slide 3" style="object-fit: cover;" />
-            </div>
+   <header class="bg-light text-dark" style="min-height: 600px; overflow: hidden; margin-top: 20px;">
+
+
+      <div class="container-fluid h-100">
+        <div class="row h-100">
+          <!-- Colonne gauche : Carousel -->
+          <div class="col-lg-6 p-0">
+            <div id="testCarousel" class="carousel slide h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="{{ asset('uploads/carousel/image1.jpg') }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Slide 1" />
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="{{ asset('uploads/carousel/image2.jpg') }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Slide 2" />
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="{{ asset('uploads/carousel/image3.jpg') }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Slide 3" />
+                </div>
+              </div>
+
+              <button class="carousel-control-prev" type="button" data-bs-target="#testCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+              <button class="carousel-control-next" type="button" data-bs-target="#testCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+            </div><div class="d-flex align-items-center ms-4">
+  <!-- Téléphone -->
+  
+  <!-- Barre de recherche -->
+  <form class="d-flex" role="search" onsubmit="return false;">
+    <input class="form-control" type="search" placeholder="Rechercher..." id="searchInput" />
+  </form>
+</div>
           </div>
 
-          <button class="carousel-control-prev" type="button" data-bs-target="#testCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
-          <button class="carousel-control-next" type="button" data-bs-target="#testCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
-        </div>
+          <!-- Colonne droite : Texte + image -->
+          <div class="col-lg-6 d-flex justify-content-start align-items-center p-5">
+  <!-- Texte -->
+  <div class="flex-grow-1 me-6">
+    <h2 class="fw-bold mb-3">Formations en e-learning</h2>
+    <p class="lead">
+      Choisissez la formation qui vous convient pour la pratique de l'audit, du management des risques ou de la finance d'entreprise.
+    </p>
+    <p>
+      Vous pouvez consulter le programme et les modalités pédagogiques de chaque formation en cliquant sur le bouton ci-dessous.
+    </p>
+    <a href="#formations" class="btn btn-primary mt-3">Voir les formations</a>
+  </div>
 
-        <div style="position:absolute; top:0; left:0; width:100%; height:100%; background-color: rgba(0,0,0,0.5); z-index:5;"></div>
+  <!-- Image à droite, à côté du texte -->
+   <div style="max-width: 350px; flex-shrink: 0;">
+    <img src="{{ asset('uploads/photos/audit-interne-cartographie-risques.avif') }}"
+         alt="Audit interne et cartographie des risques"
+         class="img-fluid rounded shadow" />
+  </div>
+</div>
 
-        <!-- Texte superposé -->
-        <div class="position-absolute top-50 start-50 translate-middle text-center text-white px-3" style="z-index:10;">
-          <h1 class="display-4 fw-bold">{{ societe.rs }}</h1>
-          <p class="lead">It's Nice To Meet You</p>
         </div>
       </div>
     </header>
@@ -119,51 +163,47 @@
           <h2 class="section-heading text-uppercase">FORMATIONS</h2>
           <h3 class="section-subheading text-muted"></h3>
         </div>
-       <div class="row">
-  {% for formation in formations %}
-    <div class="col-lg-4 col-sm-6 mb-4">
-      <div class="portfolio-item">
+        <div class="row">
+          {% for formation in formations %}
+            <div class="col-lg-4 col-sm-6 mb-4">
+              <div class="portfolio-item">
+                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{ loop.index }}">
+                  <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                      <i class="fas fa-plus fa-3x"></i>
+                    </div>
+                  </div>
 
-        <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{ loop.index }}">
-          <div class="portfolio-hover">
-            <div class="portfolio-hover-content">
-              <i class="fas fa-plus fa-3x"></i>
+                  {# Affiche la photo si définie #}
+                  {% if formation.photo %}
+                    <img class="img-fluid" src="{{ asset('uploads/photos/' ~ formation.photo) }}" alt="{{ formation.titre }}" />
+                  {% else %}
+                    <img class="img-fluid" src="{{ asset('assets/img/placeholder.png') }}" alt="Placeholder" />
+                  {% endif %}
+                </a>
+
+                <div class="portfolio-caption">
+                  <div class="portfolio-caption-heading">{{ formation.titre }}</div>
+                  <div class="portfolio-caption-subheading text-muted">{{ formation.objectifs|default("Pas d'objectif") }}</div>
+                </div>
+
+                <div class="portfolio-caption">
+                  <div class="portfolio-caption-heading">{{ formation.modalite }}</div>
+                  <div class="portfolio-caption-subheading text-muted">{{ formation.prix|default('Prix non défini') }}</div>
+                </div>
+
+                {# Affiche la vidéo si définie #}
+                {% if formation.video %}
+                  <video width="100%" controls>
+                    <source src="{{ asset('uploads/photos/' ~ formation.video) }}" type="video/mp4" />Your browser does not support the video tag.
+                  </video>
+                {% endif %}
+              </div>
             </div>
-          </div>
-          
-          {# Affiche la photo si définie #}
-          {% if formation.photo %}
-            <img class="img-fluid" src="{{ asset('uploads/photos/' ~ formation.photo) }}" alt="{{ formation.titre }}" />
           {% else %}
-            <img class="img-fluid" src="{{ asset('assets/img/placeholder.png') }}" alt="Placeholder" />
-          {% endif %}
-        </a>
-
-        <div class="portfolio-caption">
-          <div class="portfolio-caption-heading">{{ formation.titre }}</div>
-          <div class="portfolio-caption-subheading text-muted">{{ formation.objectifs|default("Pas d'objectif") }}</div>
+            <p>Aucune formation trouvée.</p>
+          {% endfor %}
         </div>
-
-        <div class="portfolio-caption">
-          <div class="portfolio-caption-heading">{{ formation.modalite }}</div>
-          <div class="portfolio-caption-subheading text-muted">{{ formation.prix|default("Prix non défini") }}</div>
-        </div>
-
-        {# Affiche la vidéo si définie #}
-        {% if formation.video %}
-          <video width="100%" controls>
-            <source src="{{ asset('uploads/photos/' ~ formation.video) }}" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        {% endif %}
-        
-      </div>
-    </div>
-  {% else %}
-    <p>Aucune formation trouvée.</p>
-  {% endfor %}
-</div>
-
       </div>
     </section>
     <!-- About -->
@@ -648,4 +688,34 @@
     color: white; /* texte blanc */
     text-transform: uppercase;
   }
+  body {
+    padding-top: 90px; /* ajuste selon la hauteur réelle de ta navbar */
+  }
+  .scrolled {
+  background-color: #212529 !important; /* fond sombre */
+  transition: background-color 0.3s ease-in-out;
+}
 </style>
+<script>
+window.addEventListener("scroll", function() {
+  const navbar = document.getElementById("mainNav");
+  if (window.scrollY > 50) {
+    navbar.classList.add("scrolled");
+  } else {
+    navbar.classList.remove("scrolled");
+  }
+});
+</script>
+<script>
+  // Petite recherche sur toute la page (like)
+  document.getElementById('searchInput').addEventListener('input', function() {
+    let query = this.value.toLowerCase();
+    let bodyText = document.body.innerText.toLowerCase();
+
+    if (query && bodyText.includes(query)) {
+      // scroll to first match
+      let range = window.find(query, false, false, true, false, false, false);
+      if (range) document.execCommand("hiliteColor", false, "yellow"); // met en surbrillance
+    }
+  });
+</script>

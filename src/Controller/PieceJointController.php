@@ -44,10 +44,10 @@ class PieceJointController extends AbstractController
         if (!$formation) {
             throw $this->createNotFoundException('Formation not found');
         }
-          
- $form = $this->createForm(PieceJointType::class, $pieceJoint, [
-        'disable_formation' => true, // disables select
-    ]);
+
+        $form = $this->createForm(PieceJointType::class, $pieceJoint, [
+            'disable_formation' => true, // disables select
+        ]);
         // Pre-select this formation in the entity
         $pieceJoint->setFormation($formation);
 
@@ -60,35 +60,40 @@ class PieceJointController extends AbstractController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $fichierFile = $form->get('fichier')->getData();
+      if ($form->isSubmitted() && $form->isValid()) {
+    $fichierFile = $form->get('fichier')->getData();
 
-            if ($fichierFile) {
-                $originalFilename = pathinfo($fichierFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $fichierFile->guessExtension();
+    if ($fichierFile) {
+        $originalFilename = pathinfo($fichierFile->getClientOriginalName(), PATHINFO_FILENAME);
+        $safeFilename = $slugger->slug($originalFilename);
+        $newFilename = $safeFilename . '-' . uniqid() . '.' . $fichierFile->guessExtension();
 
-                try {
-                    $fichierFile->move(
-                        $this->getParameter('attachments_directory'), // définir dans services.yaml
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // gérer l'exception si besoin
-                }
-
-                $pieceJoint->setFichier($newFilename);
-            }
-            $entityManager->persist($pieceJoint);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_formations_index', [], Response::HTTP_SEE_OTHER);
+        try {
+            $fichierFile->move(
+                $this->getParameter('attachments_directory'),
+                $newFilename
+            );
+        } catch (FileException $e) {
+            // log error if needed
         }
 
-        return $this->renderForm('piece_joint/new.html.twig', [
-            'piece_joint' => $pieceJoint,
-            'form' => $form,
-        ]);
+        $pieceJoint->setFichier($newFilename);
+    }
+
+    $entityManager->persist($pieceJoint);
+    $entityManager->flush();
+
+    // 👇 redirect back to the same form with same formation
+    return $this->redirectToRoute('app_piece_joint_new', [
+        'id_formation' => $formation->getId(),
+    ]);
+}
+
+return $this->renderForm('piece_joint/new.html.twig', [
+    'piece_joint' => $pieceJoint,
+    'form' => $form,
+    'formation' => $formation, // 👈 pass formation to template
+]);
     }
 
     #[Route('/{id}', name: 'app_piece_joint_show', methods: ['GET'])]

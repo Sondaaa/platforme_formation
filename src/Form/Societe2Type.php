@@ -16,7 +16,7 @@ class Societe2Type extends AbstractType
             ->add('adresse')
             ->add('contact')
             ->add('fax')
-            ->add('email')
+            ->add('email')  ->add('tel')
         ;
     }
 

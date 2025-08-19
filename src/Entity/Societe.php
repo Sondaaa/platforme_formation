@@ -29,6 +29,9 @@ class Societe
 
     #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $logo = null;
+   
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    private ?string $tel = null;
 
     // ---------------- Getters & Setters ---------------- //
 
@@ -102,4 +105,16 @@ class Societe
         $this->logo = $logo;
         return $this;
     }
+
+    public function getTel(): ?string
+    {
+        return $this->tel;
+    }
+
+    public function setTel(?string $tel): self
+    {
+        $this->tel = $tel;
+        return $this;
+    }
+
 }
