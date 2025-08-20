@@ -24,79 +24,79 @@ class FormationsController extends AbstractController
             'formations' => $formations,
         ]);
     }
- #[Route('/new', name: 'app_formations_new', methods: ['GET', 'POST'])]
-  public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
-{
-    $formations = new Formations();
-    $form = $this->createForm(FormationsType::class, $formations);
-    $form->handleRequest($request);
+    #[Route('/new', name: 'app_formations_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    {
+        $formations = new Formations();
+        $form = $this->createForm(FormationsType::class, $formations);
+        $form->handleRequest($request);
 
-    if ($form->isSubmitted() && $form->isValid()) {
-        /** @var UploadedFile|null $photoFile */
-        $photoFile = $form->get('photo')->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile|null $photoFile */
+            $photoFile = $form->get('photo')->getData();
 
-        if ($photoFile) {
-            $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename . '-' . uniqid() . '.' . $photoFile->guessExtension();
+            if ($photoFile) {
+                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $photoFile->guessExtension();
 
-            try {
-                $photoFile->move(
-                    $this->getParameter('photos_directory'), // définir dans services.yaml
-                    $newFilename
-                );
-            } catch (FileException $e) {
-                // gérer l'exception si besoin
+                try {
+                    $photoFile->move(
+                        $this->getParameter('photos_directory'), // définir dans services.yaml
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // gérer l'exception si besoin
+                }
+
+                $formations->setPhoto($newFilename);
             }
 
-            $formations->setPhoto($newFilename);
-        }
+            /** @var UploadedFile|null $videoFile */
+            $videoFile = $form->get('video')->getData();
 
-        /** @var UploadedFile|null $videoFile */
-        $videoFile = $form->get('video')->getData();
+            if ($videoFile) {
+                $originalFilename = pathinfo($videoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $videoFile->guessExtension();
 
-        if ($videoFile) {
-            $originalFilename = pathinfo($videoFile->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename . '-' . uniqid() . '.' . $videoFile->guessExtension();
+                try {
+                    $videoFile->move(
+                        $this->getParameter('photos_directory'), // définir dans services.yaml
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // gérer l'exception si besoin
+                }
 
-            try {
-                $videoFile->move(
-                    $this->getParameter('photos_directory'), // définir dans services.yaml
-                    $newFilename
-                );
-            } catch (FileException $e) {
-                // gérer l'exception si besoin
+                $formations->setVideo($newFilename);
             }
 
-            $formations->setVideo($newFilename);
+            $entityManager->persist($formations);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_formations_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        $entityManager->persist($formations);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('app_formations_index', [], Response::HTTP_SEE_OTHER);
+        return $this->renderForm('formations/new.html.twig', [
+            'formations' => $formations,
+            'form' => $form,
+        ]);
     }
-
-    return $this->renderForm('formations/new.html.twig', [
-        'formations' => $formations,
-        'form' => $form,
-    ]);
-}
     #[Route('/formations/{id}', name: 'app_formations_show', methods: ['GET'], requirements: ['id' => '\d+'])]
-public function show(int $id, EntityManagerInterface $em): Response
-{
-    // Affiche id reçu
- 
-    $formation = $em->getRepository(Formations::class)->find($id);
-    if (!$formation) {
-        throw $this->createNotFoundException('Formations not found');
-    }
+    public function show(int $id, EntityManagerInterface $em): Response
+    {
+        // Affiche id reçu
 
-    return $this->render('formations/show.html.twig', [
-        'formation' => $formation,
-    ]);
-}
+        $formation = $em->getRepository(Formations::class)->find($id);
+        if (!$formation) {
+            throw $this->createNotFoundException('Formations not found');
+        }
+
+        return $this->render('formations/show.html.twig', [
+            'formation' => $formation,
+        ]);
+    }
 
 
     #[Route('/{id}/edit', name: 'app_formations_edit', methods: ['GET', 'POST'])]
@@ -127,5 +127,4 @@ public function show(int $id, EntityManagerInterface $em): Response
 
         return $this->redirectToRoute('app_formations_index', [], Response::HTTP_SEE_OTHER);
     }
-   
 }

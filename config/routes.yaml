@@ -18,6 +18,15 @@ service:
   type: annotation
 piece_joint:
   resource: '../src/Controller/PieceJointController.php'
-  type: annotation    
+  type: annotation 
+login:
+  resource: '../src/Controller/LoginController.php'
+  type: annotation   
+register:
+  resource: '../src/Controller/RegisterController.php'
+  type: annotation          
+home_redirect:
+    path: /
+    controller: App\Controller\LoginController  
 
   

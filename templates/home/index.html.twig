@@ -8,6 +8,8 @@
     <title>formation e learning</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <!-- Font Awesome icons (free version) -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts -->
@@ -28,12 +30,25 @@
     <img src="{{ asset('uploads/logos/' ~ societe.logo) }}" alt="Logo" style="width: 90px; height: auto;" />
     <div class="ms-3 d-flex flex-column">
       <span class="rs-title fw-bold">{{ societe.rs }}</span>
-      {% if societe.fax %}
-        <span><i class="bi bi-telephone me-1"></i>{{ societe.fax }}</span>
-      {% endif %}
-      {% if societe.email %}
-        <span><i class="bi bi-envelope me-1"></i>{{ societe.email }}</span>
-      {% endif %}
+    {% if societe.tel %}
+  <span class="me-3">
+    <i class="bi bi-telephone me-1"></i>{{ societe.tel }}
+    {% if societe.fax %}
+   
+    <i class="bi bi-printer me-1"></i>{{ societe.fax }}
+   
+{% endif %}
+  </span>
+{% endif %}
+
+
+
+{% if societe.email %}
+  <span>
+    <i class="bi bi-envelope me-1"></i>{{ societe.email }}
+  </span>
+{% endif %}
+
     </div>
   </a>
 {% endif %}
@@ -51,6 +66,9 @@
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+           <li class="nav-item">
+              <a class="nav-link" href="#acceuil">Acceuil</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="#services">Services</a>
             </li>
@@ -66,12 +84,24 @@
             <li class="nav-item">
               <a class="nav-link" href="#contact">Contact</a>
             </li>
+             {# Bouton retour login #}
+    <li class="nav-item d-flex align-items-center ms-3">
+      <a href="{{ path('app_login') }}" class="btn btn-outline-light btn-sm">
+        <i class="bi bi-box-arrow-in-right"></i> Login
+      </a>
+    </li>
           </ul>
         </div>
       </div>
     </nav>
-
-    <!-- Masthead -->
+  <section class="page-section" id="acceuil">
+    <div class="container">
+        <div class="text-center">
+    <form class="d-flex" role="search" onsubmit="return false;">
+  <input class="form-control" type="search" placeholder="Rechercher..." id="searchInput" />
+  <button type="button" id="prevBtn">⬆️</button>
+  <button type="button" id="nextBtn">⬇️</button>
+</form>
    <header class="bg-light text-dark" style="min-height: 600px; overflow: hidden; margin-top: 20px;">
 
 
@@ -98,9 +128,7 @@
   <!-- Téléphone -->
   
   <!-- Barre de recherche -->
-  <form class="d-flex" role="search" onsubmit="return false;">
-    <input class="form-control" type="search" placeholder="Rechercher..." id="searchInput" />
-  </form>
+
 </div>
           </div>
 
@@ -127,9 +155,10 @@
 </div>
 
         </div>
+      </div></div>
       </div>
     </header>
-
+  </section>
     <!-- Services -->
     <section class="page-section" id="services">
       <div class="container">
@@ -211,7 +240,7 @@
       <div class="container">
         <div class="text-center">
           <h2 class="section-heading text-uppercase">About</h2>
-          <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+          <h3 class="section-subheading text-muted"> </h3>
         </div>
         <ul class="timeline">
           <li>
@@ -220,11 +249,11 @@
             </div>
             <div class="timeline-panel">
               <div class="timeline-heading">
-                <h4>2009-2011</h4>
-                <h4 class="subheading">Our Humble Beginnings</h4>
+                <h4></h4>
+                <h4 class="subheading"></h4>
               </div>
               <div class="timeline-body">
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                <p class="text-muted"></p>
               </div>
             </div>
           </li>
@@ -234,11 +263,11 @@
             </div>
             <div class="timeline-panel">
               <div class="timeline-heading">
-                <h4>March 2011</h4>
-                <h4 class="subheading">An Agency is Born</h4>
+                <h4></h4>
+                <h4 class="subheading"></h4>
               </div>
               <div class="timeline-body">
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                <p class="text-muted"></p>
               </div>
             </div>
           </li>
@@ -248,11 +277,11 @@
             </div>
             <div class="timeline-panel">
               <div class="timeline-heading">
-                <h4>December 2015</h4>
-                <h4 class="subheading">Transition to Full Service</h4>
+                <h4></h4>
+                <h4 class="subheading"></h4>
               </div>
               <div class="timeline-body">
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                <p class="text-muted"></p>
               </div>
             </div>
           </li>
@@ -262,25 +291,15 @@
             </div>
             <div class="timeline-panel">
               <div class="timeline-heading">
-                <h4>July 2020</h4>
-                <h4 class="subheading">Phase Two Expansion</h4>
+                <h4></h4>
+                <h4 class="subheading"></h4>
               </div>
               <div class="timeline-body">
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                <p class="text-muted"></p>
               </div>
             </div>
           </li>
-          <li class="timeline-inverted">
-            <div class="timeline-image">
-              <h4>
-                Be Part
-                <br />
-                Of Our
-                <br />
-                Story!
-              </h4>
-            </div>
-          </li>
+          
         </ul>
       </div>
     </section>
@@ -288,15 +307,15 @@
     <section class="page-section bg-light" id="ressource">
       <div class="container">
         <div class="text-center">
-          <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
-          <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+          <h2 class="section-heading text-uppercase"></h2>
+          <h3 class="section-subheading text-muted"></h3>
         </div>
         <div class="row">
           <div class="col-lg-4">
             <div class="team-member">
-              <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="..." />
-              <h4>Parveen Anand</h4>
-              <p class="text-muted">Lead Designer</p>
+              <img class="mx-auto rounded-circle" src="" alt="..." />
+              <h4></h4>
+              <p class="text-muted"></p>
               <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
               <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
               <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
@@ -304,9 +323,9 @@
           </div>
           <div class="col-lg-4">
             <div class="team-member">
-              <img class="mx-auto rounded-circle" src="assets/img/team/2.jpg" alt="..." />
-              <h4>Diana Petersen</h4>
-              <p class="text-muted">Lead Marketer</p>
+              <img class="mx-auto rounded-circle" src="" alt="..." />
+              <h4></h4>
+              <p class="text-muted"></p>
               <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Twitter Profile"><i class="fab fa-twitter"></i></a>
               <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Facebook Profile"><i class="fab fa-facebook-f"></i></a>
               <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
@@ -314,9 +333,9 @@
           </div>
           <div class="col-lg-4">
             <div class="team-member">
-              <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="..." />
-              <h4>Larry Parker</h4>
-              <p class="text-muted">Lead Developer</p>
+              <img class="mx-auto rounded-circle" src="" alt="..." />
+              <h4></h4>
+              <p class="text-muted"></p>
               <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
               <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
               <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
@@ -325,13 +344,13 @@
         </div>
         <div class="row">
           <div class="col-lg-8 mx-auto text-center">
-            <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+            <p class="large text-muted"></p>
           </div>
         </div>
       </div>
     </section>
     <!-- Clients -->
-    <div class="py-5">
+    {# <div class="py-5">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-3 col-sm-6 my-3">
@@ -348,13 +367,13 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> #}
     <!-- Contact -->
     <section class="page-section" id="contact">
       <div class="container">
         <div class="text-center">
           <h2 class="section-heading text-uppercase">Contact Us</h2>
-          <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+          <h3 class="section-subheading text-muted"></h3>
         </div>
         <!-- * * * * * * * * * * * * * * * -->
         <!-- * * SB Forms Contact Form * * -->
@@ -369,25 +388,25 @@
               <div class="form-group">
                 <!-- Name input -->
                 <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
-                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                <div class="invalid-feedback" data-sb-feedback="name:required"></div>
               </div>
               <div class="form-group">
                 <!-- Email address input -->
                 <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
-                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                <div class="invalid-feedback" data-sb-feedback="email:required"></div>
+                <div class="invalid-feedback" data-sb-feedback="email:email"></div>
               </div>
               <div class="form-group mb-md-0">
                 <!-- Phone number input -->
                 <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
-                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                <div class="invalid-feedback" data-sb-feedback="phone:required"></div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group form-group-textarea mb-md-0">
                 <!-- Message input -->
                 <textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required"></textarea>
-                <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                <div class="invalid-feedback" data-sb-feedback="message:required"></div>
               </div>
             </div>
           </div>
@@ -397,9 +416,9 @@
           <!-- has successfully submitted -->
           <div class="d-none" id="submitSuccessMessage">
             <div class="text-center text-white mb-3">
-              <div class="fw-bolder">Form submission successful!</div>To activate this form, sign up at
+              <div class="fw-bolder">
               <br />
-              <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+              <a href="https://startbootstrap.com/solution/contact-forms"></a>
             </div>
           </div>
           <!-- Submit error message -->
@@ -407,11 +426,11 @@
           <!-- This is what your users will see when there is -->
           <!-- an error submitting the form -->
           <div class="d-none" id="submitErrorMessage">
-            <div class="text-center text-danger mb-3">Error sending message!</div>
+            <div class="text-center text-danger mb-3"></div>
           </div>
           <!-- Submit Button -->
           <div class="text-center">
-            <button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send Message</button>
+            <button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit"></button>
           </div>
         </form>
       </div>
@@ -420,15 +439,15 @@
     <footer class="footer py-4">
       <div class="container">
         <div class="row align-items-center">
-          <div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2023</div>
+          <div class="col-lg-4 text-lg-start"> &copy;</div>
           <div class="col-lg-4 my-3 my-lg-0">
             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
           </div>
           <div class="col-lg-4 text-lg-end">
-            <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
-            <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+            <a class="link-dark text-decoration-none me-3" href="#!"></a>
+            <a class="link-dark text-decoration-none" href="#!"></a>
           </div>
         </div>
       </div>
@@ -446,23 +465,23 @@
               <div class="col-lg-8">
                 <div class="modal-body">
                   <!-- Project details -->
-                  <h2 class="text-uppercase">Project Name</h2>
-                  <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                  <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/1.jpg" alt="..." />
-                  <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                  <h2 class="text-uppercase"></h2>
+                  <p class="item-intro text-muted"></p>
+                  <img class="img-fluid d-block mx-auto" src="" alt="..." />
+                  <p></p>
                   <ul class="list-inline">
                     <li>
-                      <strong>Client:</strong>
-                      Threads
+                      <strong></strong>
+                      
                     </li>
                     <li>
-                      <strong>Category:</strong>
-                      Illustration
+                      <strong></strong>
+                      
                     </li>
                   </ul>
                   <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                     <i class="fas fa-xmark me-1"></i>
-                    Close Project
+                     
                   </button>
                 </div>
               </div>
@@ -697,25 +716,80 @@
 }
 </style>
 <script>
-window.addEventListener("scroll", function() {
-  const navbar = document.getElementById("mainNav");
-  if (window.scrollY > 50) {
-    navbar.classList.add("scrolled");
-  } else {
-    navbar.classList.remove("scrolled");
+let currentIndex = -1;
+let marks = [];
+
+function removeHighlights() {
+  document.querySelectorAll("mark").forEach(el => {
+    el.replaceWith(el.textContent);
+  });
+  marks = [];
+  currentIndex = -1;
+}
+
+function highlightText(query) {
+  if (!query) return;
+  const regex = new RegExp(query, "gi");
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+
+  let node;
+  while ((node = walker.nextNode())) {
+    if (["SCRIPT","STYLE","MARK","INPUT","TEXTAREA"].includes(node.parentNode.tagName)) continue;
+
+    if (regex.test(node.nodeValue)) {
+      const frag = document.createDocumentFragment();
+      let lastIndex = 0;
+      node.nodeValue.replace(regex, (match, offset) => {
+        // texte avant le match
+        frag.appendChild(document.createTextNode(node.nodeValue.slice(lastIndex, offset)));
+
+        // le match surligné
+        const mark = document.createElement("mark");
+        mark.textContent = match;
+        frag.appendChild(mark);
+
+        lastIndex = offset + match.length;
+      });
+
+      // texte après le dernier match
+      frag.appendChild(document.createTextNode(node.nodeValue.slice(lastIndex)));
+
+      node.replaceWith(frag);
+    }
+  }
+
+  marks = Array.from(document.querySelectorAll("mark"));
+}
+
+function jumpTo(index) {
+  if (marks.length === 0) return;
+  marks.forEach(m => m.style.background = "yellow"); // reset
+  const el = marks[index];
+  el.style.background = "orange"; // actif
+  el.scrollIntoView({behavior: "smooth", block: "center"});
+}
+
+document.getElementById('searchInput').addEventListener('input', function() {
+  removeHighlights();
+  const query = this.value.trim();
+  if (query) {
+    highlightText(query);
+    if (marks.length > 0) {
+      currentIndex = 0;
+      jumpTo(currentIndex);
+    }
   }
 });
-</script>
-<script>
-  // Petite recherche sur toute la page (like)
-  document.getElementById('searchInput').addEventListener('input', function() {
-    let query = this.value.toLowerCase();
-    let bodyText = document.body.innerText.toLowerCase();
 
-    if (query && bodyText.includes(query)) {
-      // scroll to first match
-      let range = window.find(query, false, false, true, false, false, false);
-      if (range) document.execCommand("hiliteColor", false, "yellow"); // met en surbrillance
-    }
-  });
+document.getElementById('nextBtn').addEventListener('click', function() {
+  if (marks.length === 0) return;
+  currentIndex = (currentIndex + 1) % marks.length; // navigation circulaire
+  jumpTo(currentIndex);
+});
+
+document.getElementById('prevBtn').addEventListener('click', function() {
+  if (marks.length === 0) return;
+  currentIndex = (currentIndex - 1 + marks.length) % marks.length; // navigation circulaire
+  jumpTo(currentIndex);
+});
 </script>
